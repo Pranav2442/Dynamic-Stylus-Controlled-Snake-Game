@@ -381,7 +381,7 @@ def gameLoop():
             score=score+10
             foodxcor=round(random.randint(10, screenw-20))
             foodycor=round(random.randint(10, screenh-20))
-            snakelength+=1
+            snakelength+=5
             if score>int(highscore):
                    highscore = score
                 #    highscores.append(highscore)
