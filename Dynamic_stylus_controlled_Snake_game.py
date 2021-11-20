@@ -89,7 +89,7 @@ def gameover(score,highscore):
 def welcome():
     quitgame = False
     while not quitgame:
-        gameWindow.fill((255,255,255))
+        gameWindow.fill((233,210,229))
         text_screen("Welcome to Dynamic Stylus Snake Game", black, 70, 150)
         text_screen("Have a Great Time!!!!!", black, 280,500 )
         text_screen("Press F To Play", black, 320,(screenh/2))
@@ -134,6 +134,13 @@ def snake(snakepiece, snakelist):
 highscores=[]
 
 def gameLoop():
+    gameend = False
+    quitgame = False
+
+    dir = 'r'
+    change_of_dir = dir
+
+    
     
     score=0
     highscore=0
@@ -141,13 +148,9 @@ def gameLoop():
     corx = 0
     cory = 0
     
-    dir = 'r'
-    change_of_dir = dir
+    
 
-
-    gameend = False
-    quitgame = False
-
+    
     X1 = screenw / 2
     Y1 = screenh / 2
 
@@ -157,14 +160,16 @@ def gameLoop():
     snakelist = []
     snakelength = 1
     score=0
-    # if(not os.path.exists("highscore.txt")):
-    #    with open("highscore.txt", "w") as f:
-    #        f.write("0")
-    # with open("highscore.txt", "r") as f:
-    #         highscore = f.read()
+    if(not os.path.exists("highscore.txt")):
+       with open("highscore.txt", "w") as f:
+           f.write("0")
+    with open("highscore.txt", "r") as f:
+            highscore = f.read()
 
     foodxcor = round(random.randint(100, screenw-100)) 
     foodycor = round(random.randint(100, screenh-100))
+
+
 
     
     def block1():
@@ -254,12 +259,15 @@ def gameLoop():
         u = check_region(0,0,480,0,240,240,corx,cory)
         d = check_region(0,480,240,240,480,480,corx,cory)
         
-
+        
+            
+                # with open("highscore.txt","w") as f:
+                #     f.write(str(highscore))
 
 
         while  quitgame == True:
-            # with open("highscore.txt", "w") as f:
-            #    f.write(str(highscore))
+            with open("highscore.txt", "w") as f:
+               f.write(str(highscore))
             gameWindow.fill((0, 0, 0))
             text_screen("You Lost!!!! Press F: Play Again ", (213, 50, 80),100,100)
             text_screen("or", red,430,180)
@@ -376,9 +384,9 @@ def gameLoop():
             snakelength+=1
             if score>int(highscore):
                    highscore = score
-                   highscores.append(highscore)
+                #    highscores.append(highscore)
         text_screen("Score: "+str(score),red,10,7)
-        # text_screen("High Score"+str(highscore),(255,255,255),90,90)
+        text_screen("High Score"+str(highscore),(255,255,255),(screenw-280),10)
             # score=score+10
 
         
